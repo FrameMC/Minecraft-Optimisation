@@ -1,10 +1,8 @@
 # Minecraft server optimization guide
 
-Note for users that are on vanilla, Fabric or Spigot (or anything below Paper) - go to your server.properties and change `sync-chunk-writes` to `false`. This option is forcibly set to false on Paper and its forks, but on other server implementations you need to switch this to false manually. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
+This is made to work with a majority of minecraft servers.
 
-Guide for version 1.21.11. Some things may still apply to 1.15 - 1.21.10.
-
-Based on [this guide](https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/) and other sources (all of them are linked throughout the guide when relevant).
+Based on [this guide](https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/) and other sources (all of them are linked throughout the guide when relevant) and You Have Trouble repo.
 
 Use the table of contents located above (next to `README.md`) to easily navigate throughout this guide.
 
@@ -15,13 +13,13 @@ There will never be a guide that will give you perfect results. Each server has 
 
 ## Server JAR
 Your choice of server software can make a huge difference in performance and API possibilities. There are currently multiple viable popular server JARs, but there are also a few that you should stay away from for various reasons.
-
-Recommended top picks:
-* [Paper](https://github.com/PaperMC/Paper) - The most popular server software that aims to improve performance while fixing gameplay and mechanics inconsistencies.
-* [Purpur](https://github.com/PurpurMC/Purpur) - Paper fork focused on features and the freedom of customization.
+| Name |                                        Paper                                       | Purpur                                                  |
+|------|:----------------------------------------------------------------------------------:|---------------------------------------------------------|
+| Pros | One of the most famous and used software, with various security features and fixes | Based on Paper, it allows better features configuration |
+| Cons | Less supported with versions under 1.19                                           | Less supported with versions under 1.19                |
 
 You should stay away from:
-* Any paid server JAR that claims async anything - 99.99% chance of being a scam.
+* Any paid server JAR (that claims async anything) - 99.99% chance of being a scam. **(don't use Universe Spigot, its not made for tiny/medium servers)**
 * Bukkit/CraftBukkit/Spigot - Extremely outdated in terms of performance compared to other server software you have access to.
 * Any plugin/software that enables/disables/reloads plugins on runtime. See [this section](#plugins-enablingdisabling-other-plugins) to understand why.
 * Many forks further downstream from Paper or Purpur will encounter instability and other issues. If you're seeking more performance gains, optimize your server or invest in a personal private fork.
@@ -31,11 +29,16 @@ Map pregeneration, thanks to various optimizations to chunk generation added ove
 
 If you still want to pregen the world, you can use a plugin such as [Chunky](https://github.com/pop4959/Chunky) to do it. Make sure to set up a world border so your players don't generate new chunks! Note that pregenning can sometimes take hours depending on the radius you set in the pregen plugin. Keep in mind that with Paper and above your tps will not be affected by chunk loading, but the speed of loading chunks can significantly slow down when your server's cpu is overloaded.
 
+* ```chunky radius <radius>```
+* ```chunky start```
+
 It's key to remember that the overworld, nether and the end have separate world borders that need to be set up for each world. The nether dimension is 8x smaller than the overworld (if not modified with a datapack), so if you set the size wrong your players might end up outside of the world border!
 
 **Make sure to set up a vanilla world border (`/worldborder set [diameter]`), as it limits certain functionalities such as lookup range for treasure maps that can cause lag spikes.**
 
 # Configurations
+
+Note for users that are on vanilla, Fabric or Spigot (or anything below Paper) - go to your server.properties and change `sync-chunk-writes` to `false`. This option is forcibly set to false on Paper and its forks, but on other server implementations you need to switch this to false manually. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
 
 ## Networking
 
