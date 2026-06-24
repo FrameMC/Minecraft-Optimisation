@@ -93,7 +93,7 @@ This value overwrites server.properties one if not set to `default`. You should 
 
 #### delay-chunk-unloads-by
 
-`Good starting value: 10s`
+`Good starting value: 15s`
 
 This option allows you to configure how long chunks will stay loaded after a player leaves. This helps to not constantly load and unload the same chunks when a player moves back and forth. Too high values can result in way too many chunks being loaded at once. In areas that are frequently teleported to and loaded, consider keeping the area permanently loaded. This will be lighter for your server than constantly loading and unloading chunks.
 
