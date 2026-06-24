@@ -75,7 +75,7 @@ Simulation distance is distance in chunks around the player that the server will
 
 #### view-distance
 
-`Good starting value: 7`
+`Good starting value: 6`
 
 This is the distance in chunks that will be sent to players, similar to no-tick-view-distance from paper.
 
