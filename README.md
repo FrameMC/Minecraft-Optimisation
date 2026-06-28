@@ -116,7 +116,7 @@ Good starting values:
     ender_pearl: 8
     experience_bottle: 3
     experience_orb: 16
-    eye_of_ender: 8
+    eye_of_ender: 2
     fireball: 8
     firework_rocket: 8
     llama_spit: 3
